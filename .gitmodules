@@ -1,0 +1,6 @@
+[submodule "comments"]
+	path = comments
+	url = https://github.com/apify-projects/store-meta-comments
+[submodule "feed"]
+	path = feed
+	url = https://github.com/apify-projects/store-meta-feed

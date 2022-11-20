@@ -1,0 +1,50 @@
+{
+    "title": "This actor must be runned only from other actors",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "searchtext": {
+            "title": "Address or administrative area",
+            "type": "string",
+            "description": "Address or administrative area as free text",
+            "editor": "textfield",
+            "sectionCaption": "Geocoding and search",
+            "sectionDescription": ""
+        },
+        "radiusMeters": {
+            "title": "Search radius",
+            "type": "integer",
+            "description": "Radius from geocoded or custom coordinates, if 0 search is limited by approx 300km distance",
+            "editor": "number",
+            "minimum": 0
+        },
+        "maxResults": {
+            "title": "Search results",
+            "type": "integer",
+            "description": "Max results for search",
+            "editor": "number",
+            "default": 100,
+            "minimum": 1,
+            "maximum": 100
+        },
+        "proxy": {
+            "title": "Proxy configuration",
+            "type": "object",
+            "description": "<strong>A proxy server is required to run this actor!</strong> Either use an Apify residential proxy, or provide your own proxy servers. Datacenter proxies will not work.",
+            "prefill": {
+                "useApifyProxy": true,
+                "apifyProxyGroups": ["RESIDENTIAL"]
+            },
+            "editor": "proxy",
+            "sectionCaption": "RESIDENTIAL Proxy configuration",
+            "sectionDescription": "<strong>RESIDENTIAL proxy is required to run this actor!</strong> Datacenter proxies will not work."
+        },
+        "maxRequestRetries": {
+            "title": "Max request retries",
+            "type": "integer",
+            "description": "Select how many times the page will be retried if the scraper is blocked or encounters other errors.",
+            "default": 9
+        }      
+    },
+    "required": ["proxy"]
+}
