@@ -9,8 +9,41 @@
             "description": "Address or administrative area as free text",
             "editor": "textfield",
             "sectionCaption": "Geocoding and search",
-            "sectionDescription": ""
+            "sectionDescription": "Provide address to find coordinates or specify location directly to get places by category"
         },
+        "lat": {
+            "title": "Latitude",
+            "type": "string",
+            "description": "Use instead of search by address",
+            "editor": "textfield"
+        },
+        "lng": {
+            "title": "Longitude",
+            "type": "string",
+            "description": "Use instead of search by address",
+            "editor": "textfield"
+        },
+        "category": {
+            "title": "Get places of specified type",
+            "description": "Check for more options at https://developer.here.com/documentation/places/dev_guide/topics/place_categories/places-category-system.html",
+            "enum": [
+                "",
+                "+",
+                "500-5000-0000"
+            ],
+            "enumTitles": [
+                "Cities (city halls)",
+                "ALL TYPES",
+                "Hotel or Motel"
+            ],
+            "type": "string",
+            "editor": "select",
+            "default": "",
+            "example": "",
+            "prefill": "",
+            "sectionCaption": "Scraping places without search terms or URLs",
+            "sectionDescription": "This option will get you all places from a specific search area, no matter if they are bakeries or petrol stations. The scrape however will be significantly slower and more costly than using a regular search, so we don't recommend using this unless strictly necessary."
+        },      
         "radiusMeters": {
             "title": "Search radius",
             "type": "integer",

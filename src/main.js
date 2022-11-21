@@ -29,8 +29,6 @@ Actor.main(async () => {
         log,
     });
 
-    log.debug('hereGeocodeAndBrowse', data);
-
     if (data?.length) {
         await Dataset.pushData(data);
     }

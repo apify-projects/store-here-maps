@@ -1,28 +1,27 @@
-# Solution template
-This repository serves as a template for creating repositories for new solutions. Using a template makes it easier to create new repos with pre-defined contents and ensures consistency between the repositories.
+# HERE Maps API Wrapper
+Metamorph to actor or add to your own source code as submodule by
+```
+git submodule add https://github.com/apify-projects/store-here-maps here-maps`
+```
 
-## How to use this template
+## Actor wrapper
+See `/src/main.js`, implemented approach allows to do any calls to Here API with predefined proxy URL and http request callback, therefore runnable from any version of Apify SDK or even without it.
+1. Must provide valid `proxyUrl`
+2. Must provide reference to `requestAsBrowser` compatible with `gotScraping`
+3. Optional `log` for `log?.debug()` and `log?.error()`
+4. The rest of the input passed "as is" to API wrappers
 
-1. Click the Use this template button in the top right corner.
-2. Choose a name for the repository. It should be in the format `vendor`-`customer`-`solution`-`...`. 
-   - **Examples:**
-   - apify-thorn-facebook-scraper
-   - topmonks-microsoft-google-scraper
-   - topmonks-microsoft-google-data-processor
-   - devbros-apple-some-codename-scraper
-3. Make sure the repo is **private**.
-4. Create the repo.
+**Data flow**
 
-**Once you have the repo created:**
+1. If initial lat-lng coordinates not provided actor will try to pickup results from first `geocoder()` match
+2. For lat-lng from geocoding or input actor will `browsePlaces()` for places.
+3. Without `radiusMeters` places limited by both amount (max 100) of results and distance, max known distance is 200km
 
-1. Go to Settings -> Manage Access -> Invite teams or people.
-2. Add the **Apify Team** as **admin**. If the solution will be delivered by a partner, add their team as **admin** too.
-4. Edit this README and fill in the details in the template below. If a field cannot be filled, write **N/A**.
-5. Finally, delete this guide from the Readme, so that only the newly added details will remain.
-6. You're done! Thanks for using the template!
-
-# vendor-customer-solution
-
-**Kanban link:** Add link to the Apify Kanban card.
-
-**Issue link:** Add link to the issue created in Delivery Issue Tracker or some other tracking issue.
+## Categories
+All from **https://developer.here.com/documentation/places/dev_guide/topics/place_categories/places-category-system.html** except 900 - administrative data non-queriable by HERE API, leads to http400 error
+```
+{
+    status: 400,
+    message: 'None of the categories 900-9100-0000 is supported for querying'
+}
+INSTEAD actor will search for "City hall" type by default.
