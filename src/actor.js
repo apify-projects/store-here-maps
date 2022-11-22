@@ -1,6 +1,6 @@
 import { geocoder, browsePlaces } from './here-api.js'; // eslint-disable-line import/extensions
 
-const hereGeocodeAndBrowse = async (options) => {
+const hereGeocodeAndBrowse = async (options, kvStore) => {
     const {
         searchtext = '',
         lat,
@@ -8,12 +8,10 @@ const hereGeocodeAndBrowse = async (options) => {
         log,
     } = options;
 
-    const dataItems = [];
-
     if (!(lat && lng) && searchtext) {
         const geo = await geocoder(options);
         if (geo?.length) {
-            dataItems.push(...geo);
+            kvStore?.setValue('OUTPUT', geo);
             const location = geo[0]?.location;
             const coords = location?.navigationPosition?.[0];
             options.lat = coords?.latitude;
@@ -23,12 +21,12 @@ const hereGeocodeAndBrowse = async (options) => {
         log?.debug(`geocoded`, geo);
     }
 
+    const dataItems = [];
     if (options.lat && options.lng) {
         const searchItems = await browsePlaces(options);
         if (Array.isArray(searchItems)) {
             dataItems.push(...searchItems);
         }
-        log?.debug(`searchItems ${searchItems?.length}`);
     }
 
     return dataItems;

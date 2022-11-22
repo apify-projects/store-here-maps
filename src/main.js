@@ -27,7 +27,7 @@ Actor.main(async () => {
         proxyUrl,
         requestAsBrowser: gotScraping,
         log,
-    });
+    }, KeyValueStore);
 
     if (data?.length) {
         await Dataset.pushData(data);
