@@ -18,10 +18,13 @@ See `/src/main.js`, implemented approach allows to do any calls to Here API with
 3. Without `radiusMeters` places limited by both amount (max 100) of results and distance, max known distance is 200km
 
 ## Categories
-All from **https://developer.here.com/documentation/places/dev_guide/topics/place_categories/places-category-system.html** except 900 - administrative data non-queriable by HERE API, leads to http400 error
+Accepted categories from **https://developer.here.com/documentation/places/dev_guide/topics/categories.html**
+All root FP (permanent) categories added, from HERE categories for now added "PDS City halls" and "PDS Hotel or Motel".
+
+Note: 900* PDS categories will not work - administrative data non-queriable by HERE API, leads to http400 error
 ```
 {
     status: 400,
     message: 'None of the categories 900-9100-0000 is supported for querying'
 }
-INSTEAD actor will search for "City hall" type by default.
+```

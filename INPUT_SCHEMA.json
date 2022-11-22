@@ -62,16 +62,14 @@
             "editor": "select",
             "default": "",
             "example": "",
-            "prefill": "",
-            "sectionCaption": "Scraping places without search terms or URLs",
-            "sectionDescription": "This option will get you all places from a specific search area, no matter if they are bakeries or petrol stations. The scrape however will be significantly slower and more costly than using a regular search, so we don't recommend using this unless strictly necessary."
+            "prefill": ""
         },      
         "lat": {
             "title": "Latitude",
             "type": "string",
             "description": "Use instead of search by address",
             "editor": "textfield",
-            "sectionCaption": "Lat-Lng coordinates with radius",
+            "sectionCaption": "Latitude-Longitude coordinates with radius",
             "sectionDescription": "Instead address you can specify location directly"
         },
         "lng": {
@@ -87,15 +85,6 @@
             "editor": "number",
             "minimum": 0
         },
-        "maxResults": {
-            "title": "Search results",
-            "type": "integer",
-            "description": "Max results for search",
-            "editor": "number",
-            "default": 100,
-            "minimum": 1,
-            "maximum": 100
-        },
         "proxy": {
             "title": "Proxy configuration",
             "type": "object",
@@ -105,15 +94,30 @@
                 "apifyProxyGroups": ["RESIDENTIAL"]
             },
             "editor": "proxy",
-            "sectionCaption": "RESIDENTIAL Proxy configuration",
-            "sectionDescription": "<strong>RESIDENTIAL proxy is required to run this actor!</strong> Datacenter proxies will not work."
+            "sectionCaption": "Proxy and scraper configuration",
+            "sectionDescription": ""
+        },
+        "maxResults": {
+            "title": "Search results",
+            "type": "integer",
+            "description": "Max results for search",
+            "editor": "number",
+            "default": 100,
+            "minimum": 1,
+            "maximum": 100
         },
         "maxRequestRetries": {
             "title": "Max request retries",
             "type": "integer",
             "description": "Select how many times the page will be retried if the scraper is blocked or encounters other errors.",
             "default": 9
-        }      
+        },
+        "debugLog": {
+            "title": "Debug Log",
+            "type": "boolean",
+            "description": "Show data processing log, otherwise only errors will be displayed",
+            "default": false
+        }
     },
     "required": ["proxy"]
 }
