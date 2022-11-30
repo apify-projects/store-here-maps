@@ -68,6 +68,7 @@ const browsePlaces = async (options, recursionDepth = 0) => {
         maxResults = 100,
         radiusMeters = 0,
         category = '',
+        // countryCode,
         isRecursiveSearch,
         log,
     } = options;

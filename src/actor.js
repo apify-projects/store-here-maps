@@ -11,12 +11,17 @@ const hereGeocodeAndBrowse = async (options, kvStore) => {
     if (!(lat && lng) && searchtext) {
         const geo = await geocoder(options);
         if (geo?.length) {
-            kvStore?.setValue('OUTPUT', geo);
-            const location = geo[0]?.location;
+            const geoMatch = geo[0];
+            kvStore?.setValue('OUTPUT', geoMatch);
+            const location = geoMatch?.location;
             const coords = location?.navigationPosition?.[0];
             options.lat = coords?.latitude;
             options.lng = coords?.longitude;
             options.mapView = location?.mapView;
+            if (geoMatch?.matchQuality?.country) {
+                options.countryCode = geoMatch?.location?.address?.country;
+                log.info(`[COUNTRY]`, geoMatch?.location?.address);
+            }
         }
         log?.debug(`geocoded`, geo);
     }
